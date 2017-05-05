@@ -1,0 +1,52 @@
+db.fussball.insert([
+{
+    name: 'Dortmund',
+    gruendung: new Date("1909-12-19"),
+    farben: ['gelb', 'schwarz'],
+    Tabellenplatz: 16,
+    nike: 'n'
+    },
+        {name: 'Schalke', gruendung: new Date("1904-5-4"), farben: ['blau'], Tabellenplatz: 15, nike: 'n'},
+        {name: 'Paderborn', gruendung: new Date("1907-8-14"), farben:['blau', 'weiss', ], Tabellenplatz:14, nike:'n'},
+        {name: 'Hertha', gruendung: new Date("1892-7-25"), farben: ['blau', 'weiss'], Tabellenplatz: 13, nike: 'j'},
+        {name: 'Augsburg', gruendung: new Date("1907-8-8"), farben: ['rot', 'weiss'], Tabellenplatz: 12,  nike: 'j'},
+        {name: 'Pauli', gruendung: new Date("1910-5-15"), farben: ['braun', 'weiss'], Tabellenplatz: 11, nike: 'n'},
+        {name: 'Gladbach', gruendung: new Date("1900-8-1"), farben: ['schwarz', 'weiss', 'gruen'], Tabellenplatz: 10, nike: 'n'},
+        {name: 'Frankfurt', gruendung: new Date("1899-3-8"), farben: ['rot', 'schwarz', weiss'], Tabellenplatz: 9, nike: 'j'},
+        {name: 'Leverkusen', gruendung: new Date("1904-11-20-16-15"), farben: ['rot', 'schwarz'], Tabellenplatz: 8, nike: 'n'},
+        {name: 'Stuttgart', gruendung: new Date("1893-9-9"), farben: ['rot', 'weiss'], Tabellenplatz: 7, nike: 'n'},
+        {name: 'Werder', gruendung: new Date("1899-2-4"), farben: ['gruen','weiss'], Tabellenplatz: 6, nike: 'j'},
+     
+        
+    
+    ])
+    
+    
+    Queries:
+    
+    db.getCollection('fussball').find({name :"Augsburg"})
+    
+    db.getCollection('fussball').find({farben :"schwarz"})
+    
+  	db.getCollection('fussball').find({ $and: [{farben :"weiss"} ,{farben :"gruen"} , {nike :"j"}] })
+  
+    db.getCollection('fussball').find({ $and: [ {nike:"j"}, {$or: [{farben :"weiss"} ,{farben :"gruen"} ]} ] })
+    
+    db.getCollection('fussball').find().sort({Tabellenplatz:-1}).limit(1)
+      
+    db.getCollection('fussball').find({name:"Augsburg"},{_id:0})
+    
+    Nach der update auf Platz 1 ist alle attribute gelöst und nur der tabellenplatz attribute ist in datenbank geschrieben.
+    
+    db.fussball.update( {Tabellenplatz: 1},{name: 'Augsburg', gruendung: new Date("1907-8-8"), farben: ['rot', 'weiss'], Tabellenplatz: 12,  nike: 'j'})
+    
+    db.fussball.update( {name: "Leverkusen"}, {$set: {Tabellenplatz: 2}})
+    
+    db.fussball.update( {name: "Werder"}, {$inc: {Tabellenplatz: 1}})
+    
+    db.fussball.update( {name: "HSV"}, {$set: {absteigend: "J"}})
+    
+    db.fussball.updateMany( {farben: "weiss"}, {$set: {Waschtemperatur: 90}})
+    
+    
+    
